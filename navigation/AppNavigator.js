@@ -3,8 +3,10 @@ import { createAppContainer, createSwitchNavigator } from 'react-navigation'
 
 import MainTabNavigator from './MainTabNavigator'
 
-export default createAppContainer(
+const AppContainer = createAppContainer(
   createSwitchNavigator({
     Main: MainTabNavigator
   })
 )
+
+export default AppContainer

@@ -7,6 +7,7 @@ import {
 
 import TabBarIcon from '../components/TabBarIcon'
 import HomeScreen from '../screens/HomeScreen'
+import ProductSreen from '../screens/ProductScreen'
 
 const config = Platform.select({
   web: { headerMode: 'screen' },
@@ -22,13 +23,13 @@ const HomeStack = createStackNavigator(
 
 HomeStack.navigationOptions = {
   tabBarLabel: 'Home',
-  TabBarIcon: ({ focused }) => (
+  tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
       name={
         Platform.OS === 'android'
-          ? 'md-information-circle'
-          : `ios-information-circle${focused ? '' : '-outline'}`
+          ? 'md-home'
+          : `ios-home${focused ? '' : '-outline'}`
       }
     />
   )
@@ -36,8 +37,32 @@ HomeStack.navigationOptions = {
 
 HomeStack.path = ''
 
+const ProductStack = createStackNavigator(
+  {
+    Product: ProductSreen
+  },
+  config
+)
+
+ProductStack.navigationOptions = {
+  tabBarLabel: 'Products',
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon
+      focused={focused}
+      name={
+        Platform.OS === 'android'
+          ? 'md-bowtie'
+          : `ios-bowtie${focuesed ? '' : '-outline'}`
+      }
+    />
+  )
+}
+
+ProductStack.path = ''
+
 const tabNavigator = createBottomTabNavigator({
-  HomeStack
+  HomeStack,
+  ProductStack
 })
 
 tabNavigator.path = ''
