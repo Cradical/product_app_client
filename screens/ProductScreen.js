@@ -11,8 +11,9 @@ export default class ProductScreen extends React.Component {
 
   async componentDidMount() {
     console.log('component did mount')
-    const baseURL = 'http://192.168.250.244:4000'
+
     try {
+      const baseURL = 'http://192.168.250.244:4000'
       let response = await fetch(`${baseURL}/api/products`)
       let data = await response.json()
       this.setState({ products: data.products })
@@ -25,8 +26,10 @@ export default class ProductScreen extends React.Component {
     return (
       <View style={global.container}>
         <ScrollView>
-          <Text>Product Screen</Text>
-          <ProductCard products={this.state.products} />
+          <ProductCard
+            products={this.state.products}
+            navigate={this.props.navigation}
+          />
         </ScrollView>
       </View>
     )
@@ -34,5 +37,5 @@ export default class ProductScreen extends React.Component {
 }
 
 ProductScreen.navigationOptions = {
-  header: null
+  title: 'Products'
 }

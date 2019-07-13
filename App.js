@@ -2,11 +2,10 @@ import { AppLoading } from 'expo'
 import { Asset } from 'expo-asset'
 import * as Font from 'expo-font'
 import React, { useState } from 'react'
-import { ProgressBarAndroid, StyleSheet, View, Text } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 
 import AppContainer from './navigation/AppNavigator'
 import { Ionicons } from '@expo/vector-icons'
-import { Platform } from '@unimodules/core'
 
 export default function App(props) {
   const [isLoadingComplete, setLoadingComplete] = useState(false)

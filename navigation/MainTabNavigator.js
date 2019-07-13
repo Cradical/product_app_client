@@ -8,6 +8,7 @@ import {
 import TabBarIcon from '../components/TabBarIcon'
 import HomeScreen from '../screens/HomeScreen'
 import ProductSreen from '../screens/ProductScreen'
+import ProductDetailsScreen from '../screens/ProductDetailsScreen'
 
 const config = Platform.select({
   web: { headerMode: 'screen' },
@@ -39,7 +40,8 @@ HomeStack.path = ''
 
 const ProductStack = createStackNavigator(
   {
-    Product: ProductSreen
+    Product: ProductSreen,
+    ProductDetails: ProductDetailsScreen
   },
   config
 )
