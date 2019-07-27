@@ -7,6 +7,7 @@ import {
 
 import TabBarIcon from '../components/TabBarIcon'
 import HomeScreen from '../screens/HomeScreen'
+import PaymentScreen from '../screens/PaymentScreen'
 import ProductSreen from '../screens/ProductScreen'
 import ProductDetailsScreen from '../screens/ProductDetailsScreen'
 
@@ -41,7 +42,8 @@ HomeStack.path = ''
 const ProductStack = createStackNavigator(
   {
     Product: ProductSreen,
-    ProductDetails: ProductDetailsScreen
+    ProductDetails: ProductDetailsScreen,
+    Payment: PaymentScreen
   },
   config
 )

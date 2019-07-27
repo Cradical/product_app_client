@@ -1,11 +1,21 @@
 import React from 'react'
-import { View, StyleSheet, TouchableHighlight, Alert } from 'react-native'
+import { PaymentsStripe as Stripe } from 'expo-payments-stripe'
+import { View, StyleSheet, TouchableHighlight } from 'react-native'
 import { PricingCard } from 'react-native-elements'
 import '@expo/vector-icons'
 
-class ProductCard extends React.Component {
+import PaymentScreen from './PaymentScreen'
+
+export default class ProductCard extends React.Component {
   constructor(props) {
     super(props)
+  }
+
+  componentWillMount() {
+    Stripe.setOptionsAsync({
+      publishableKey: 'pk_test_xh1t474nEADwqtTkhP4D8xnj00zCYnnJiX',
+      androidPayMode: 'test' // Android only
+    })
   }
 
   handlePressEvent = product => {
@@ -14,7 +24,29 @@ class ProductCard extends React.Component {
     navigate.navigate('ProductDetails', product)
   }
 
+  handleBuyNow = async () => {
+    console.log('payment initiated')
+    try {
+      const response = await fetch('http://192.168.250.244:4000/api/checkout', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json'
+        }
+      })
+      const data = await response.json()
+      const sessionId = data.session.id
+      console.log('session_id: ', sessionId)
+
+      // check out the utils/types.js to get options to pass into the paymentRequest()
+      const results = await Stripe.paymentRequestWithCardFormAsync()
+    } catch (error) {
+      console.warn('STRIPE ERROR: ', error)
+    }
+  }
+
   render() {
+    console.log(Stripe)
     if (!this.props) return null
 
     const { products } = this.props
@@ -37,12 +69,7 @@ class ProductCard extends React.Component {
                 'styling'
               ]}
               button={{ title: 'BUY NOW' }}
-              onButtonPress={() =>
-                Alert.alert(
-                  'Purchase Complete!',
-                  'Great! You just bought the product! It is being delivered!'
-                )
-              }
+              onButtonPress={this.handleBuyNow}
             />
           </TouchableHighlight>
         </View>
@@ -50,8 +77,6 @@ class ProductCard extends React.Component {
     })
   }
 }
-
-export default ProductCard
 
 const styles = StyleSheet.create({
   button: {
@@ -61,3 +86,7 @@ const styles = StyleSheet.create({
     paddingBottom: 10
   }
 })
+
+PaymentScreen.navigationOptions = {
+  title: 'Payment'
+}

@@ -12,10 +12,10 @@ export default class ProductDetailsScreen extends React.Component {
       <View key={product.id}>
         <Card title={product.name}>
           <Image style={styles.imageStyle} source={{ uri: product.img_url }} />
-          <Text>{product.category.name}</Text>
+          <Text style={styles.categoryTitle}>{product.category.name}</Text>
           <Text style={styles.description}>{product.description}</Text>
           <Button
-            style={styles.button}
+            style={styles.buttonStyle}
             title='buy now'
             onPress={() =>
               Alert.alert(
@@ -35,9 +35,23 @@ ProductDetailsScreen.navigationOptions = {
 }
 
 const styles = StyleSheet.create({
+  buttonStyle: {
+    color: 'red',
+    margin: 10,
+    backgroundColor: 'red'
+  },
   imageStyle: {
     height: 250,
     width: 250,
     margin: 'auto'
+  },
+  categoryTitle: {
+    textTransform: 'capitalize',
+    fontWeight: 'bold',
+    paddingBottom: 10,
+    fontSize: 15
+  },
+  descriptionStyle: {
+    paddingBottom: 10
   }
 })

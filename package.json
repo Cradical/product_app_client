@@ -13,6 +13,7 @@
     "eslint-plugin-react-native": "^3.7.0",
     "expo": "^33.0.0",
     "expo-font": "^5.0.1",
+    "expo-payments-stripe": "^5.0.1",
     "expo-web-browser": "^5.0.3",
     "react": "16.8.3",
     "react-dom": "^16.8.6",
@@ -20,7 +21,8 @@
     "react-native-elements": "^1.1.0",
     "react-native-vector-icons": "^6.6.0",
     "react-native-web": "^0.11.4",
-    "react-navigation": "^3.11.0"
+    "react-navigation": "^3.11.0",
+    "tipsi-stripe": "^7.5.0"
   },
   "devDependencies": {
     "babel-preset-expo": "^5.1.1"

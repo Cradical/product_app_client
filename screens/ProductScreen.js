@@ -10,8 +10,6 @@ export default class ProductScreen extends React.Component {
   }
 
   async componentDidMount() {
-    console.log('component did mount')
-
     try {
       const baseURL = 'http://192.168.250.244:4000'
       let response = await fetch(`${baseURL}/api/products`)
