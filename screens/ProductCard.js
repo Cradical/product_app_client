@@ -45,6 +45,10 @@ export default class ProductCard extends React.Component {
     }
   }
 
+  convertToDollarAmount(amount) {
+    return `$${amount / 100}.00`
+  }
+
   render() {
     console.log(Stripe)
     if (!this.props) return null
@@ -62,7 +66,7 @@ export default class ProductCard extends React.Component {
             <PricingCard
               color='#4f9deb'
               title={product.name}
-              price={product.price}
+              price={this.convertToDollarAmount(product.price)}
               info={[
                 product.category.name,
                 'Click for more details',
