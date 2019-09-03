@@ -11,7 +11,7 @@ export default function HomeScreen() {
           <Text style={styles.subtitle}>The Place to Buy Cool Things</Text>
           <Image
             style={styles.imageStyle}
-            source={require('../assets/images/Baby_kid_babies_tshirt_tee_clothes_girl-512.png')}
+            source={require('../assets/images/robot-dev.png')}
           />
           <Text>When you need it.</Text>
           <Text>Always on the go.</Text>
