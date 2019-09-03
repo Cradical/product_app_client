@@ -6,17 +6,17 @@ import ProductCard from './ProductCard'
 
 export default class ProductScreen extends React.Component {
   state = {
-    products: []
+    products: [],
   }
 
   async componentDidMount() {
     try {
-      const baseURL = 'http://192.168.250.244:4000'
+      const baseURL = 'http://10.0.0.13:4000'
       let response = await fetch(`${baseURL}/api/products`)
       let data = await response.json()
       this.setState({ products: data.products })
     } catch (error) {
-      console.log(error)
+      throw error
     }
   }
 
@@ -35,5 +35,5 @@ export default class ProductScreen extends React.Component {
 }
 
 ProductScreen.navigationOptions = {
-  title: 'Products'
+  title: 'Products',
 }

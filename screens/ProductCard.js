@@ -14,29 +14,26 @@ export default class ProductCard extends React.Component {
   componentWillMount() {
     Stripe.setOptionsAsync({
       publishableKey: 'pk_test_xh1t474nEADwqtTkhP4D8xnj00zCYnnJiX',
-      androidPayMode: 'test' // Android only
+      androidPayMode: 'test', // Android only
     })
   }
 
   handlePressEvent = product => {
     const { navigate } = this.props
-    console.log('card pressed')
     navigate.navigate('ProductDetails', product)
   }
 
   handleBuyNow = async () => {
-    console.log('payment initiated')
     try {
       const response = await fetch('http://192.168.250.244:4000/api/checkout', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          Accept: 'application/json'
-        }
+          Accept: 'application/json',
+        },
       })
       const data = await response.json()
       const sessionId = data.session.id
-      console.log('session_id: ', sessionId)
 
       // check out the utils/types.js to get options to pass into the paymentRequest()
       const results = await Stripe.paymentRequestWithCardFormAsync()
@@ -50,7 +47,6 @@ export default class ProductCard extends React.Component {
   }
 
   render() {
-    console.log(Stripe)
     if (!this.props) return null
 
     const { products } = this.props
@@ -70,7 +66,7 @@ export default class ProductCard extends React.Component {
               info={[
                 product.category.name,
                 'Click for more details',
-                'styling'
+                'styling',
               ]}
               button={{ title: 'BUY NOW' }}
               onButtonPress={this.handleBuyNow}
@@ -84,13 +80,13 @@ export default class ProductCard extends React.Component {
 
 const styles = StyleSheet.create({
   button: {
-    marginTop: 10
+    marginTop: 10,
   },
   description: {
-    paddingBottom: 10
-  }
+    paddingBottom: 10,
+  },
 })
 
 PaymentScreen.navigationOptions = {
-  title: 'Payment'
+  title: 'Payment',
 }
