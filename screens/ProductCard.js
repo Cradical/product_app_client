@@ -23,25 +23,6 @@ export default class ProductCard extends React.Component {
     navigate.navigate('ProductDetails', product)
   }
 
-  handleBuyNow = async () => {
-    try {
-      const response = await fetch('http://192.168.250.244:4000/api/checkout', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-        },
-      })
-      const data = await response.json()
-      const sessionId = data.session.id
-
-      // check out the utils/types.js to get options to pass into the paymentRequest()
-      const results = await Stripe.paymentRequestWithCardFormAsync()
-    } catch (error) {
-      console.warn('STRIPE ERROR: ', error)
-    }
-  }
-
   convertToDollarAmount(amount) {
     return `$${amount / 100}.00`
   }
@@ -68,8 +49,8 @@ export default class ProductCard extends React.Component {
                 'Click for more details',
                 'styling',
               ]}
-              button={{ title: 'BUY NOW' }}
-              onButtonPress={this.handleBuyNow}
+              button={{ title: 'Product Details' }}
+              onButtonPress={() => this.handlePressEvent(product)}
             />
           </TouchableHighlight>
         </View>
