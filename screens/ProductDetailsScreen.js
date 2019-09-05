@@ -64,6 +64,10 @@ export default class ProductDetailsScreen extends React.Component {
       })
   }
 
+  convertToDollarAmount(amount) {
+    return `$${amount / 100}.00`
+  }
+
   render() {
     const product = this.props.navigation.state.params
     return (
@@ -71,7 +75,7 @@ export default class ProductDetailsScreen extends React.Component {
         <Card title={product.name}>
           <Image style={styles.imageStyle} source={{ uri: product.img_url }} />
           <Text style={styles.categoryTitle}>{product.category.name}</Text>
-          <Text>{product.price}</Text>
+          <Text>{this.convertToDollarAmount(product.price)}</Text>
           <Text style={styles.description}>{product.description}</Text>
           <Button
             style={styles.buttonStyle}
