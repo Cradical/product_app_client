@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, View, Image, StyleSheet } from 'react-native'
+import { Alert, Text, View, Image, StyleSheet } from 'react-native'
 import { Card, Button } from 'react-native-elements'
 import { PaymentsStripe as Stripe } from 'expo-payments-stripe'
 import Axios from 'axios'
@@ -28,8 +28,26 @@ export default class ProductDetailsScreen extends React.Component {
         body,
         { headers }
       )
+
+      Alert.alert('Success!', 'Your Payment Went Through', [
+        {
+          text: 'OK',
+          onPress: () => console.log('Alert Accepted'),
+        },
+      ])
+
       return data
     } catch (error) {
+      Alert.alert(
+        'Payment Error',
+        'Something went wrong while processing your payment',
+        [
+          {
+            text: 'OK',
+            onPress: () => console.log('Alter Accepted'),
+          },
+        ]
+      )
       console.warn('error: ', error)
       return Promise.reject('Error making payment', error)
     }
