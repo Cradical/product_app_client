@@ -13,8 +13,6 @@ export default class ProductDetailsScreen extends React.Component {
   }
 
   async processPayment(price, tokenId) {
-    console.log('price: ', price)
-    console.log('tokenId: ', tokenId)
     const body = {
       amount: price,
       tokenId,
@@ -24,21 +22,15 @@ export default class ProductDetailsScreen extends React.Component {
       'Content-type': 'application/json',
     }
 
-    console.log('before post request')
-    console.log('body_param: ', body)
-    console.log('headers: ', headers)
-
     try {
       const { data } = await Axios.post(
         'http://10.0.0.13:4000/api/checkout',
         body,
         { headers }
       )
-      console.log('after post request')
-      console.log('data: ', data)
       return data
     } catch (error) {
-      console.log('error: ', error)
+      console.warn('error: ', error)
       return Promise.reject('Error making payment', error)
     }
   }
@@ -47,15 +39,8 @@ export default class ProductDetailsScreen extends React.Component {
     const product = this.props.navigation.state.params
     return Stripe.paymentRequestWithCardFormAsync()
       .then(stripeTokenInfo => {
-        console.log('Token created: ', { stripeTokenInfo })
-        console.log(
-          'run processPayment() with ',
-          product.price,
-          stripeTokenInfo.tokenId
-        )
         return this.processPayment(product.price, stripeTokenInfo.tokenId)
       })
-      .then(console.log('Payment request skipped'))
       .catch(error => {
         console.warn('Payment failed: ', { error })
       })
@@ -63,7 +48,6 @@ export default class ProductDetailsScreen extends React.Component {
 
   render() {
     const product = this.props.navigation.state.params
-    console.log('product: ', product)
     return (
       <View key={product.id}>
         <Card title={product.name}>
